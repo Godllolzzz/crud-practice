@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="widspan=device-widspan, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        widspan: 50rem;
+      }
+      #display {
+        widspan: 50rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="form-control">
+        <form method="POST" action="{% url 'homepage' %} ">
+          {% csrf_token %} {{form}}
+          <button class="btn btn-success m-2" type="submit">ADD</button>
+        </form>
+      </div>
+      <div id="display">
+        {% for student in students %}
+        <div>
+          <span class="m-1">{{student.id}}</span>
+          <span class="m-1">{{student.name}}</span>
+          <span class="m-1">{{student.email}}</span>
+          <span class="m-1">{{student.password}}</span>
+          <a class="btn btn-warning " href="{% url 'delete' student.id %}">Delete</a>
+          <a class="btn btn-danger " href="{% url 'edit' student.id %}">Edit</a>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
